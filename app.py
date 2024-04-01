@@ -23,45 +23,44 @@ def getLLamaresponse(input_text, no_words, blog_style):
     return response
 
 def main():
-    st.set_page_config(page_title="Generate Blogs",
+    st.set_page_config(page_title="📝 AI Blog Generator",
                     page_icon='🤖',
-                    layout='centered',
-                    initial_sidebar_state='collapsed')
+                    layout='wide',
+                    initial_sidebar_state='expanded')
 
-    st.header("Generate Blogs 🤖")
+    st.title("📝 AI Blog Generator")
 
-    input_text = st.text_input("Enter the Blog Topic")
+    input_text = st.text_input("🔍 Enter the Blog Topic")
 
     ## creating two more columns for additional 2 fields
-    col1, col2 = st.columns([5,5])
+    col1, col2 = st.columns([3,2])
 
     with col1:
-        no_words = st.text_input('No of Words')
-
+        no_words = st.text_input('✍️ No. of Words', value="500")
     with col2:
-        blog_style = st.selectbox('Writing the blog for',
-                                ('Researchers', 'Data Scientist', 'Common People'), index=0)
+        blog_style = st.selectbox('🖋️ Writing Style',
+                                ('Professional', 'Casual', 'Academic'), index=0)
     
-    submit = st.button("Generate")
+    submit = st.button("🚀 Generate Blog")
 
     ## Final response
     if submit:
         generated_blog = getLLamaresponse(input_text, no_words, blog_style)
         
-        st.subheader("Generated Blog:")
-        st.write(generated_blog)
+        st.subheader("📝 Generated Blog:")
+        st.markdown(generated_blog, unsafe_allow_html=True)
 
         # Enhancements:
         # 1. Allow user interaction to modify the generated blog
-        st.subheader("Modify Blog:")
-        modified_blog = st.text_area("Edit the Generated Blog", value=generated_blog, height=200)
+        st.subheader("✏️ Modify Blog:")
+        modified_blog = st.text_area("✏️ Edit the Generated Blog", value=generated_blog, height=200)
 
         # 2. Add social sharing buttons
-        st.subheader("Share Blog:")
-        if st.button("Share on Twitter"):
+        st.subheader("🌐 Share Blog:")
+        if st.button("Twitter 🐦"):
             # Code to share the blog on Twitter
             pass
-        if st.button("Share on Facebook"):
+        if st.button("Facebook 📘"):
             # Code to share the blog on Facebook
             pass
 
